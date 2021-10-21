@@ -1,19 +1,19 @@
 package dao;
 
 import modelo.Farmacia;
+import java.nio.file.Path;
 
 public interface FarmaciaDAO {
 	
 	/**
-	 * Lee los medicamentos de la farmacia de un fichero xml
-	 * mediante XSTREAM	
+	 * Lee los medicamentos de la farmacia de un fichero
 	 * @return devuelve si se ha leido correctamente
 	 */
-	public Farmacia leer();
+	public Farmacia leer(Path farmaciaXML);
+
 	
 	/**
-	 * Guarda los medicamentos de la farmacia en un fichero XML 
-	 * mediamente XSTREAM
+	 * Guarda los medicamentos de la farmacia en un fichero  
 	 * @param farmacia
 	 * @return devuelve si se ha guardado correctamente
 	 */

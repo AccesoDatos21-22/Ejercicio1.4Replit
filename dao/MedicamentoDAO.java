@@ -10,8 +10,10 @@ public interface MedicamentoDAO {
 	
 	public boolean guardar(Medicamento medicamento);
 	
-	public Medicamento buscar(String nombre);
-
+	public List<Medicamento> buscar(String nombre);
+	
+	public Medicamento buscar(int codigo);
+		
 	public boolean actualizar(Medicamento medicamento);
 	
 	public boolean borrar(Medicamento medicamento);	

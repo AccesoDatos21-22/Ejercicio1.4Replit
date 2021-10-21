@@ -39,6 +39,8 @@ import jakarta.xml.bind.Unmarshaller;
 import modelo.Empleado;
 import modelo.Empresa;
 
+import dao.EmpresaDOM;
+
 public class Main {
 
   private static final String JAXB_XML_FILE = "xml/EmpresaJAXB.xml";
@@ -87,59 +89,36 @@ public class Main {
 	}
 
 	private static void ejemploEscribirDOM() {
-		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      EmpresaDOM empresaDOM = new EmpresaDOM();
+			long time = System.currentTimeMillis();
+			System.out.println("Inicio: " + new Date(time));
+			Empresa cc = new Empresa();
+			cc.setIdEmpresa(1);
+			cc.setDireccion("En la nube");
+			cc.setNombreEmpresa("IES");
+			cc.setNumEmpleados(10);
 
-			DocumentBuilder builder = factory.newDocumentBuilder();
-
-			DOMImplementation implementation = builder.getDOMImplementation();
-
-			Document document = implementation.createDocument(null, "Empleados", null);
-			document.setXmlVersion("1.0"); // asignamos la version de nuestro XML
-
+			ArrayList<Empleado> alCU = new ArrayList<Empleado>();
+			int init = 20000;
 			for (int i = 1; i < 10; i++) {
-				Element raiz = document.createElement("empleado");
+				Empleado cu = new Empleado();
+				cu.setId(i);
+				cu.setActivo(true);
+				cu.setNumeroEmpl(init++);
+				cu.setNombre("Empleado " + i);
+				cu.setTitulo("SW Architect");
+				cu.setFechaAlta(new Date(System.currentTimeMillis()));
 
-				document.getDocumentElement().appendChild(raiz);
-
-				CrearElemento("id", Integer.toString(i), raiz, document);
-				CrearElemento("nombre", "Empleado " + i, raiz, document);
-				CrearElemento("dep", "01", raiz, document);
-				CrearElemento("salario", "1000.0", raiz, document);
+				alCU.add(cu);
 			}
 
-			// Creamos la fuente XML a partir del documento
-			Source source = new DOMSource(document);
-			// Creamos el resultado en el fichero Empleados.xml
-			Result result = new StreamResult(new java.io.File(DOM_XML_FILE));
-			// Obtenemos un TransformerFactory
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			// Le damos formato y realizamos la transformación del documento a fichero
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-			transformer.transform(source, result);
-			// Mostramos el documento por pantalla especificando el canal de salida el
-			// System.out
-			Result console = new StreamResult(System.out);
+			cc.setEmpleados(alCU);
 
-			transformer.transform(source, console);
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+      empresaDOM.guardar(cc);
 
 	}
 
-	static void CrearElemento(String datoEmple, String valor, Element raiz, Document document) {
-		Element elem = document.createElement(datoEmple);
-		Text text = document.createTextNode(valor);
-		raiz.appendChild(elem);
-		elem.appendChild(text);
-	}
+	
 
 private static void ejemploEscribirXSTREAM() {
 
@@ -281,9 +260,9 @@ private static void ejemploEscribirXSTREAM() {
 
 	public static void main(String[] args) {
   	// testTrabajadorDAOImp();
-     ejemploJaxb();
-		// ejemploEscribirDOM();
-		// ejemploLeerDOM();
+    // ejemploJaxb();
+		 ejemploEscribirDOM();
+	//	 ejemploLeerDOM();
 		
     // ejemploEscribirXSTREAM();
   	// ejemploLeerXSTREAM();

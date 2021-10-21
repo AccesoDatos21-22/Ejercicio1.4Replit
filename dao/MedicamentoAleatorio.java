@@ -16,7 +16,13 @@ public class MedicamentoAleatorio implements MedicamentoDAO {
 	}
 
 	@Override
-	public Medicamento buscar(String nombre) {
+	public List<Medicamento> buscar(String nombre) {
+		
+		return null;
+	}
+
+   @Override
+	public Medicamento buscar(int Codigo) {
 		
 		return null;
 	}

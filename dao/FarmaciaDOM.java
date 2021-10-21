@@ -1,10 +1,9 @@
 package dao;
 
 import java.nio.file.Path;
-
 import modelo.Farmacia;
 
-public class FarmaciaDOM{
+public class FarmaciaDOM implements FarmaciaDAO{
 
 	/**
 	 * Lee los medicamentos de la farmacia de un fichero xml
@@ -12,8 +11,8 @@ public class FarmaciaDOM{
 	 * @param farmacia
 	 * @return
 	 */
-	public boolean leer(Path farmaciaXML) {
-		return false;
+	public Farmacia leer(Path farmaciaXML) {
+		return null;
 		
 	}
 	

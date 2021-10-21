@@ -5,7 +5,7 @@ public class TrabajadorDAOImp implements TrabajadorDAO {
 
 	public static final String FICHERO = "empleado.bin";
 
-	@Override
+@Override
 	public boolean insertar(Trabajador e) {
 		try (RandomAccessFile raf = new RandomAccessFile(FICHERO, "rw")) {
 			// posiciono en el registro del empleado a insertar
@@ -52,6 +52,7 @@ public class TrabajadorDAOImp implements TrabajadorDAO {
 		}
 		return emple;
 	}
+	
 
 	@Override
 	public boolean actualizar(Trabajador e) {
